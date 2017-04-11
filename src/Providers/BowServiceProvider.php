@@ -3,6 +3,7 @@
 namespace Zelf\Bow\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Dusk\DuskServiceProvider;
 
 class BowServiceProvider extends ServiceProvider
 {
@@ -37,5 +38,9 @@ class BowServiceProvider extends ServiceProvider
             __DIR__.'/../../config/bow.php',
             'bow'
         );
+
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->register(DuskServiceProvider::class);
+        }
     }
 }
