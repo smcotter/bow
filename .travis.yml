@@ -1,0 +1,34 @@
+sudo: required
+dist: trusty
+language: php
+php:
+  - '7.1'
+services:
+  - mysql
+
+before_script:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+    - mysql -e 'CREATE DATABASE testing;'
+    - composer create-project --prefer-dist laravel/laravel travis
+    - cd travis/
+    - cp ../composer.json.testing composer.json
+    - cp ../.env.testing .env
+    - composer update
+    - sed -i "178aTCG\\\\Voyager\\\\VoyagerServiceProvider::class,\nZelf\\\\Bow\\\\Providers\\\\BowServiceProvider::class" config/app.php
+    - sed -i "4ause Illuminate\\\\Support\\\\Facades\\\\Schema;" app/Providers/AppServiceProvider.php
+    - sed -i "16aSchema::defaultStringLength(191);" app/Providers/AppServiceProvider.php
+    - travis_retry php artisan voyager:install --with-dummy
+    - php artisan vendor:publish --tag=bow
+    - cp -R ../tests/* tests/
+    - composer dump-autoload
+    - php artisan migrate
+    - php artisan db:seed --class=BowDatabaseSeeder
+    - ./vendor/laravel/dusk/bin/chromedriver-linux &
+    - php artisan key:generate
+    - php artisan serve &
+    - sleep 10
+
+script:
+    - php artisan dusk
+
