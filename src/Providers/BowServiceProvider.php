@@ -4,6 +4,7 @@ namespace Zelf\Bow\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
+use Zelf\Bow\Console\Commands\InstallCommand;
 
 class BowServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,12 @@ class BowServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'bow');
 
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                InstallCommand::class,
+            ]);
+        }
     }
 
     /**
