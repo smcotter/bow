@@ -35,14 +35,6 @@ All the views are editable under `resources/views/vendor/bow` in your project on
 
 Via Composer
 
-This is a early version, it requires a change in the minimum stability in composer:
-
-``` json
-...
-"minimum-stability": "dev",
-...
-```
-
 ``` bash
 $ composer require zelf/bow
 ```
