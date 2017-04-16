@@ -19,11 +19,8 @@ before_script:
     - sed -i "4ause Illuminate\\\\Support\\\\Facades\\\\Schema;" app/Providers/AppServiceProvider.php
     - sed -i "16aSchema::defaultStringLength(191);" app/Providers/AppServiceProvider.php
     - travis_retry php artisan voyager:install --with-dummy
-    - php artisan vendor:publish --tag=bow
+    - travis_retry php artisan bow:install
     - cp -R ../tests/* tests/
-    - composer dump-autoload
-    - php artisan migrate
-    - php artisan db:seed --class=BowDatabaseSeeder
     - ./vendor/laravel/dusk/bin/chromedriver-linux &
     - php artisan key:generate
     - php artisan serve &

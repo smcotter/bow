@@ -57,6 +57,7 @@ Add the Bow service provider to the `config/app.php` file in the `providers` arr
 
     // Package Service Providers
     TCG\Voyager\VoyagerServiceProvider::class,
+    // ...
     Zelf\Bow\Providers\BowServiceProvider::class,
     // ...
 
@@ -68,16 +69,7 @@ Then run the following commands:
 
 ``` php
 
-php artisan voyager:install --with-dummy
-or
-php artisan voyager:install
-
-php artisan vendor:publish --tag=bow
-
-composer dump-autoload
-
-php artisan migrate
-php artisan db:seed --class=BowDatabaseSeeder
+php artisan bow:install
 ```
 
 ## Change log
@@ -86,10 +78,8 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Testing
 
-When I do write any :D
-
 ``` bash
-$ composer test
+$ php artisan dusk
 ```
 
 ## Contributing
