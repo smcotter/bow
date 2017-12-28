@@ -1,5 +1,5 @@
 {
-    "name": "smcotter/bow",
+    "name": "zelf/bow",
     "type": "library",
     "description": "Frontend for Laravel Voyager admin",
     "keywords": [
