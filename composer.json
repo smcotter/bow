@@ -6,6 +6,8 @@
         "zelf",
         "bow"
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "homepage": "https://github.com/zelf/bow",
     "license": "MIT",
     "authors": [
